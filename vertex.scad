@@ -18,7 +18,7 @@ module wings(vertex_angles, holes=true) {
       if (holes) {
       for (i = [-1, 1])
         for (x = [30, 40, wing_length-5])
-        for (z = [base_thickness+5, ((height-10) - (base_thickness+5)) /2, height-10])
+        for (z = [base_thickness+5, (((height-10) - (base_thickness+5)) /2) + base_thickness+5, height-10])
         translate([0,i*x,z])
           rotate([0,0,-i*120])
           rotate([90,0,0])
@@ -82,6 +82,8 @@ module motor() {
 }
 
 base();
+translate([100,0,0]) motor();
+translate([-100,0,0]) pulley();
 include<inc/configuration.scad>
 use<inc/functions.scad>
 use<polyholes.scad>
