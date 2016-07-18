@@ -1,35 +1,36 @@
-
-count=6;
 wing_length=60;
 wing_thickness=7.5;
-base_thickness=5;
-height=40 + base_thickness;
-track=[17.4,24.5, height];
-center=25;
-mounting_screw_dia = 3.4;
-plate_length=55;
-module wings(vertex_angles, holes=true) {
-    difference() {
-      union() {
-        translate([-wing_thickness/4,0,height/2])roundcube([track[0]+(wing_thickness*1.5), track[1]+wing_thickness,height], center=true);
-        for (i = vertex_angles) 
-          rotate([0,0,i]) translate([wing_length/2,0,height/2])roundcube([wing_length, wing_thickness, height ],center=true);
-      }
-      if (holes) {
-      for (i = [-1, 1])
-        for (x = [30, 40, wing_length-5])
-        for (z = [base_thickness+5, (((height-10) - (base_thickness+5)) /2) + base_thickness+5, height-10])
-        translate([0,i*x,z])
-          rotate([0,0,-i*120])
-          rotate([90,0,0])
-          #cylinder(r=2.4, h=70,center=true);
-      }
-    }
-}
-module base() {
+module wings(vertex_angles, holes=true, holes_only=false) {
   difference() {
     union() {
-      wings([60,-60]);
+      translate([-wing_thickness/4,0,height/2])roundcube([track[0]+(wing_thickness*1.5), track[1]+wing_thickness,height], center=true);
+      for (i = vertex_angles) 
+        rotate([0,0,i]) translate([wing_length/2,0,height/2])roundcube([wing_length, wing_thickness, height ],center=true);
+    }
+    if (holes) {
+      for (i = [-1, 1])
+        for (x = [30, 40, wing_length-5])
+          for (z = [base_thickness+5, (((height-10) - (base_thickness+5)) /2) + base_thickness+5, height-10])
+            translate([0,i*x,z])
+              rotate([0,0,-i*120])
+              rotate([90,0,0])
+              #cylinder(r=2.4, h=70,center=true);
+    }
+  }
+  if (holes_only == true) {
+    for (i = [-1, 1])
+      for (x = [30, 40, wing_length-5])
+        for (z = [base_thickness+5, (((height-10) - (base_thickness+5)) /2) + base_thickness+5, height-10])
+          translate([0,i*x,z])
+            rotate([0,0,-i*120])
+            rotate([90,0,0])
+            cylinder(r=2.4, h=70,center=true);
+  }
+}
+module base(holes_only=false) {
+  difference() {
+    union() {
+      wings([60,-60], holes_only=holes_only);
       hull() {
         linear_extrude(height=base_thickness) projection(cut=false)wings([60,-60]);
       }

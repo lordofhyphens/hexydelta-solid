@@ -1,24 +1,14 @@
-// Copyright (C) 2012 t00tie
-// Adapto is licensed under the Creative Commons - GNU GPL license.
-// http://creativecommons.org/licenses/GPL/2.0/
+// Copyright (C) 2012 Joseph Lenox
+// HexyDelta 
 
 //==========================================================================//
-// Configuration file for Adapto OpenSCAD files                             //
+// Configuration file for HexyDelta OpenSCAD files                          //
 // Scroll past the definition section to change basic and advanced settings //
 //==========================================================================//
 
 //====================//
 // Definition Section //
 //====================//
-// Frame and Walls
-// frameX and frameY are the dimensions of the frame material when viewed on end(the end of an extrusion looks roughly like an X)
-// frameX is the width of the frame material
-// frameY is the height of the frame material
-//   x
-//  [ ]y
-// these are used to find offsets for screw placing so screws meet the (slot in the) middle of the frame
-frameX=20;// width of the frame material(alu, wood etc.)
-frameY=20;// height of the frame material
 
 // Print the hole_calibration.scad object to dial in the next 6 settings
 // Google found http://www.fairburyfastener.com/xdims_metric_nuts.htm
@@ -38,14 +28,6 @@ ACME14=6.5;// diameter of 1/4 inch ACME threaded rod in mm
 ACME14nut=12.8;// diameter of ACME 1/4 inch nut flat to flat in mm
 ACME14nutThickness=6.5;// thickness of ACME 1/4 inch nut in mm
 
-
-// Linear Bearings
-// format is IDxODxL
-lm8uu=[8, 15, 24];
-lm10uu=[10, 19, 29];
-lm10luu=[10, 19, 55];
-lm12uu=[12, 21, 30];
-
 //rotary bearings
 // format is IDxODxL
 xx623=[3, 10, 4];
@@ -53,28 +35,24 @@ MF204=[4, 10, 4];
 MF126=[6, 12, 4];
 rotaryBearing=xx623;// for readability(can be changed if other bearings are used
 
-//====================//
-// Basic Config Items //
-//====================//
-smoothRod=8;				// diameter of smooth rods in mm
-linearBearing=lm8uu;	// change this to the linear bearing you are using from the definitions section
-zRod=M5;				// change this to the z threaded rod you are using from the definitions section
-zRodnut=M5nut;		// change this to the z nut you are using from the definitions section
-zRodnutThickness=M5nutThickness;	// change this to the z nut thickness you are using from the definitions section
 
+//=======================//
+//  Basic Config Items   //
+//=======================//
 
+count=6;
 //=======================//
 // Advanced Config Items //
 //=======================//
-$fn=90;		// default resolution for parts, decrease if part compiling or stl/gcode is unmanageable
-thickness=5;		// thickness of walls etc. in parts
-pullyDiameter=12.2;	// GT2-20 toothed section diameter
+$fn=30;		// default resolution for parts, decrease if part compiling or stl/gcode is unmanageable
+plate_dia = 25.4*(8.5 + (1.5/12));
+inset_hole=3.3+1.5;
+inset_hole_r = (plate_dia / 2 ) - inset_hole;
+base_thickness=5;
+height=40 + base_thickness;
+track=[17.4,24.5, height];
+center=25;
+mounting_screw_dia = 3.4;
+plate_length=55;
 
-// center of Z drive rod, relative to Z extrusion center
-shaft_offset=[47+5, 15];
-x_rod_thickness=20;
-length_to_hole=43;
-bearing_to_vslot=9.63;
-belt_z_space = 16;
-rail_separation = belt_z_space + x_rod_thickness + 2; // minimum space between the top and bottom 
 tolerance=0.2;
