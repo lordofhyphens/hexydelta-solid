@@ -15,6 +15,7 @@
 M8=8.4;// diameter of M8 threaded rod
 M5=5.3;// diameter of M5 threaded rod
 M3=3.4;// diameter of M3 threaded rod
+M2_5=2.7; // diameter of M2.5 threaded rod
 M8nut=13;// diameter of M8 nut flat to flat
 M5nut=8;// diameter of M5 nut flat to flat
 M3nut=5.6;// diameter of M3 nut flat to flat
@@ -44,7 +45,7 @@ count=6;
 //=======================//
 // Advanced Config Items //
 //=======================//
-$fn=30;		// default resolution for parts, decrease if part compiling or stl/gcode is unmanageable
+$fn=8;		// default resolution for parts, decrease if part compiling or stl/gcode is unmanageable
 plate_dia = 25.4*(8.5 + (1.5/12));
 inset_hole=3.3+1.5;
 inset_hole_r = (plate_dia / 2 ) - inset_hole;
