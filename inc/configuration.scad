@@ -32,6 +32,7 @@ ACME14nutThickness=6.5;// thickness of ACME 1/4 inch nut in mm
 //rotary bearings
 // format is IDxODxL
 xx623=[3, 10, 4];
+xx625=[5, 16, 6];
 MF204=[4, 10, 4];
 MF126=[6, 12, 4];
 rotaryBearing=xx623;// for readability(can be changed if other bearings are used

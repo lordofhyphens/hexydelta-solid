@@ -1,5 +1,5 @@
-w=40;
-h=34;
+h=40;
+w=34;
 difference() {
     union() {
         roundcube([w+10, h+10, 5], center=true);
@@ -32,6 +32,12 @@ difference() {
         translate([0,i*(h-6-6)/2,0])
             cylinder(r=6, h=5,center=true);
     }
+    for (i = [-1, 1]) {
+        translate([i*w/2,0,6]) 
+        {
+            rotate([0,90,0])cylinder(d=3.4, h=10,center=true);
+        }
+    }
 }
 for (i = [-1, 1]) {
     translate([i*w/2,0,6]) 
@@ -42,6 +48,7 @@ for (i = [-1, 1]) {
                 translate([0,0,-6])roundcube([10,h-5,5], center=true);
             }
             rotate([0,90,0])cylinder(d=3.4, h=10,center=true);
+            if (i == -1) translate([10,0,0]) translate([0,0,10])roundcube([15,15,25], center=true);
         }
     }
 }
