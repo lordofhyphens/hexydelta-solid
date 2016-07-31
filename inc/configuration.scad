@@ -53,6 +53,7 @@ inset_hole_r = (plate_dia / 2 ) - inset_hole;
 base_thickness=5;
 height=40 + base_thickness;
 track=[17.4,24.5, height];
+track_thickness = 2;
 center=25;
 mounting_screw_dia = 3.4;
 plate_length=55;
