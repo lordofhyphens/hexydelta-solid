@@ -82,7 +82,7 @@ module contact_pieces()
 }
 
 slide();
-translate([40,0,0]) contact_pieces();
+translate([50,0,(track[0]/2)]) rotate([90,90,0]) contact_pieces();
 translate([-50,0,0])slide(mount=false);
 include<inc/configuration.scad>
 use<inc/functions.scad>
