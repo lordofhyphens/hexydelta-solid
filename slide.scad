@@ -77,7 +77,7 @@ module contact_pieces()
                 #translate([0,j,i]) rotate([0,90,0])cylinder(d=2.9, h=40, center=true);
         translate([-9,0,0])
         #cube([track[0],track[1], track[2]+10],center=true);
-        #cube([track[1],10, track[2]+10],center=true);
+        #cube([track[1],5, track[2]+10],center=true);
     }
 }
 
