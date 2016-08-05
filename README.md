@@ -1,5 +1,5 @@
 ##HexyDelta - a 6-sided Delta-style 3D Printer
-### Original design by Phillip Kenyon (@pkTux)
+### Original design by [Phillip Kenyon](https://github.com/pkTux)
 
 Re-implementation of HexyDelta vertices.
 
