@@ -7,11 +7,15 @@ hull(){
     cylinder(d=center, h=5, $fn=60);
     translate([center/2-(center/4),0,100]) cylinder(d=center/4, h=5, $fn=60);
 }
+hull(){
+    translate([5,0,90])cylinder(d=center/4, h=5, $fn=60);
+    translate([center/2-(center/4)+5,0,100]) cylinder(d=center/4, h=5, $fn=60);
+}
 difference() {
     roundcube([center+15, center+15, 5],center=true);
     for(i=[-(center+15-hole_spacing)/2, (center+15-hole_spacing)/2]){
         for(j=[-(center+15-hole_spacing)/2, (center+15-hole_spacing)/2]){
-            #translate([i, j, -5/2]) cylinder(d=M5,h=10);
+            #translate([i, j, -5/2]) cylinder(d=M5+1.5,h=10);
         }
     }
 }
