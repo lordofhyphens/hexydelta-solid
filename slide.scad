@@ -63,7 +63,7 @@ module slide(mount=true) {
 }
 
 // slide pieces
-module contact_pieces()
+module contact_pieces(reduced_contact=0)
 {
     difference() {
         roundcube([track[0]+5, track[1]+25, track[2]+5],center=true);
@@ -78,11 +78,16 @@ module contact_pieces()
         translate([-9,0,0])
         #cube([track[0],track[1], track[2]+10],center=true);
         #cube([track[1],5, track[2]+10],center=true);
+        if (reduced_contact > 0) {
+            for (i = [-15:reduced_contact:15])
+                translate([0,0,i])
+                    #cube([30, track[1]+5,2.5],center=true);
+        }
     }
 }
 
 slide();
-translate([50,0,(track[0]/2)]) rotate([90,90,0]) contact_pieces();
+translate([50,0,(track[0]/2)]) rotate([90,90,0]) contact_pieces(reduced_contact=1);
 translate([-50,0,0])slide(mount=false);
 include<inc/configuration.scad>
 use<inc/functions.scad>

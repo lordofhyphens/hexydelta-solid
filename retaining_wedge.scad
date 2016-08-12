@@ -1,5 +1,5 @@
 
-module wedge(thick=3.2, tension=0.2, shaft=3, screw=M3) 
+module wedge(thick=3.2, tension=0.2, shaft=3, standoff=2.5, screw=M3) 
 {
     difference() {
         union() {
@@ -11,7 +11,7 @@ module wedge(thick=3.2, tension=0.2, shaft=3, screw=M3)
                 }
         rotate([0,0,60])
             translate([-(screw)/2,0,0])
-            translate([0,0,thick-tension])cylinder(d=screw+shaft,h=thick, $fn=30);
+            translate([0,0,thick-tension])cylinder(d=screw+shaft,h=standoff, $fn=30);
         }
         rotate([0,0,60])
             translate([-screw/2,0,0])
