@@ -1,5 +1,5 @@
 wing_length=60;
-wing_thickness=7.5;
+wing_thickness=4.5;
 module wings(vertex_angles, holes=true, holes_only=false) {
   difference() {
     union() {
@@ -47,39 +47,54 @@ module base(holes_only=false) {
   }
 }
 
-module face_mount(type="none", hole=5.5) 
+module face_mount(type="none", hole=5.5, shadow=false) 
 { // Front mounting
-  if (type != "none") {
-    difference() {
-      union() {
-        translate([40,0,height/2])roundcube([wing_thickness, plate_length,height],center=true);
-        if (type == "pulley") {
-          translate([32,0,center])rotate([0,90,0]) cylinder(r2=hole/2 + 3, r1=hole/2+1, h=5);
+    if (shadow) {
+        // four motor mounting holes
+        difference() 
+        {
+            translate([10,0,center])rotate([0,90,0])#linear_extrude(height=height) stepper_motor_mount(17, tolerance=1);
+            translate([10,0,center])rotate([0,90,0])cylinder(d=25, h=height);;
         }
-      }
-      if (type == "motor") {
-        translate([10,0,center])rotate([0,90,0])#linear_extrude(height=height) stepper_motor_mount(17);
-    } else {
-      translate([20,0,center])rotate([0,90,0])#polyhole(d=hole, h=25);
     }
+    else {
+        face_distance = (type == "pulley" ? [39, 0, height/2] : [42, 0, height/2]);
+        if (type != "none") {
+            difference() {
+                union() {
+                    translate(face_distance)roundcube([wing_thickness, plate_length,height],center=true, r=1);
+                    if (type == "pulley") {
+                        translate([32,0,center])rotate([0,90,0]) cylinder(r2=hole/2 + 3, r1=hole/2+1, h=5, $fn=18);
+                    }
+                }
+                if (type == "motor") {
+                    translate([10,0,center])rotate([0,90,0])#linear_extrude(height=height) stepper_motor_mount(17, tolerance=0.5);
+                } else {
+                    translate([20,0,center])rotate([0,90,0])#polyhole(d=hole, h=25);
+                }
 
+            }
+            depth = ( type == "motor" ? 20 : 30);
+            shift = ( type == "motor" ? 24 : 12);
+            difference() {
+                for (i = [plate_length/2 - wing_thickness/2, -plate_length/2 + wing_thickness/2]) 
+                    translate([depth/2+shift,i,height/2]) roundcube([depth,wing_thickness,height],center=true);
+                translate([18,0,((height-10)/2)+5])rotate([90,0,0])#cylinder(d=height-10, h=70,center=true);
+            }
+        }
     }
-
-    difference() {
-      for (i = [plate_length/2 - wing_thickness/2, -plate_length/2 + wing_thickness/2]) 
-        translate([30/2+12,i,height/2]) roundcube([30,wing_thickness,height],center=true);
-      translate([18,0,((height-10)/2)+5])rotate([90,0,0])#cylinder(d=height-10, h=70,center=true);
-    }
-  }
 }
 
 module pulley() {
-  base();
-  face_mount("pulley");
+    base();
+    face_mount("pulley");
 }
 module motor() {
-  base(); 
-  face_mount("motor");
+    difference() {
+        base(); 
+        translate([-30,0,0])face_mount("motor", shadow=true);
+    }
+    translate([-10,0,0])face_mount("motor");
 }
 
 base();
