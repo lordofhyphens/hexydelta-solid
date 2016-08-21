@@ -62,8 +62,8 @@ module adapter(tolerance=0.2, filament=3, back=true)
     else {
         translate([0,0,11.5])
             #translate([-19,20,-5.5-5]){
-                rotate([90,0,0])cylinder(r=1.6, h=40);
-                #translate([22.5,0,10.3]) rotate([90,0,0])cylinder(r=1.6, h=40);
+                rotate([90,0,0])cylinder(r=1.2, h=40);
+                #translate([22.5,0,10.3]) rotate([90,0,0])cylinder(r=1.2, h=40);
             }
       #translate([0,20,32+11.5])cube([60,40,40], center=true);
       #translate([-7,-1,-5+11.5])cube([35,5+7,16], center=true);
