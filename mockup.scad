@@ -13,14 +13,15 @@ module buildplate_holes(d=3.1) {
 }
 
 *translate([0,0,plate_height])rotate([0,0,30])buildplate();
-base_set(holes_only=false);
-
+*base_set(holes_only=false);
+echo(dead_zone);
 difference() {
   union() {
     for (i = [30:60:330]) {
-      rotate([0,0,i])translate([(plate_dia/2)+(5/2)+11.7,0,plate_height/2]) {
-        roundcube([5,95,plate_height],center=true);
-        translate([-15,0,0])roundcube([30,10,plate_height],center=true);
+      rotate([0,0,i])translate([bed_radius+wing_thickness/2+dead_zone+1.6,0,plate_height/2]) {
+      // this is the length of the hexagon inscribed on the circle, plus the dead zone, divided by 2 (from center)
+        roundcube([5,-wing_thickness+(plate_dia+dead_zone+12)/2,plate_height],center=true, r=1);
+        translate([-(5+dead_zone)/2,0,0])roundthing([5+dead_zone,[10,40],plate_height],center=true, r=2);
       }
     }
   }
@@ -32,7 +33,7 @@ difference() {
 module base_set(cutout = false, gaps = true) {
   for (i = [0, 3, -2, 2, -1])
     rotate([0,0,60*i])
-      translate([(plate_dia/2) + 25,0,0]) rotate([0,0,180])base(holes=gaps, holes_only=cutout);
+      translate([(plate_dia/2) + dead_zone,0,0]) rotate([0,0,180])base(holes=gaps, holes_only=cutout);
 }
 
 use<vertex.scad>

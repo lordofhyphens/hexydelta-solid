@@ -163,7 +163,25 @@ module ext2020(l=20, teeth = [1, 1, 1, 1], depth=1.5, tolerance=0.2) {
 /* 
   Cube with rounded edges.
 */
-module roundcube(dims, r = 3, center = false, $fn=$fn)
+module roundthing(dims, r=3, center=false, $fn=60)
+{
+  hull() {
+    if (center)
+    {
+      translate([r -dims[0]/2,r - dims[1][0]/2,-dims[2]/2]) cylinder(r=r, h=dims[2], $fn=$fn);
+      translate([r -dims[0]/2,(dims[1][0]/2)-(r),-dims[2]/2]) cylinder(r=r, h=dims[2], $fn=$fn);
+      translate([dims[0]/2-(r),(dims[1][1]/2)-(r),-dims[2]/2]) cylinder(r=r, h=dims[2], $fn=$fn);
+      translate([dims[0]/2-(r),r - (dims[1][1]/2),-dims[2]/2]) cylinder(r=r, h=dims[2], $fn=$fn);
+
+    } else {
+      translate([r,r,0]) cylinder(r=r, h=dims[2], $fn=$fn);
+      translate([r,dims[1]-(r),0]) cylinder(r=r, h=dims[2], $fn=$fn);
+      translate([dims[0]-(r),dims[1]-(r),0]) cylinder(r=r, h=dims[2], $fn=$fn);
+      translate([dims[0]-(r),r,0]) cylinder(r=r, h=dims[2], $fn=$fn);
+    }
+  }
+}
+module roundcube(dims, r = 3, center = false, $fn=60)
 {
   hull() {
     if (center)

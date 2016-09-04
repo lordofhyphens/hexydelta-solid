@@ -1,11 +1,9 @@
-wing_length=60;
-wing_thickness=4.5;
 module wings(vertex_angles, holes=true, holes_only=false) {
   difference() {
     union() {
-      translate([-wing_thickness/4,0,height/2])roundcube([track[0]+(wing_thickness*1.5), track[1]+wing_thickness,height], center=true);
+      translate([-wing_thickness/4,0,height/2])roundcube([track[0]+(wing_thickness*1.5), track[1]+wing_thickness,height], center=true, r=2);
       for (i = vertex_angles) 
-        rotate([0,0,i]) translate([wing_length/2,0,height/2])roundcube([wing_length, wing_thickness, height ],center=true);
+        rotate([0,0,i]) translate([wing_length/2,0,height/2])roundcube([wing_length, wing_thickness, height ],center=true, r=2);
     }
     if (holes) {
       for (i = [-1, 1])
