@@ -60,10 +60,11 @@ plate_length=55;
 tolerance=0.2;
 wing_length=60;
 wing_thickness=7.66;
-arm_length=217;
+arm_length=230;
 effector_radius=25;
 bed_radius=85;
 carriage_offset=8.25;
-// computed value, the gap to space from the center of the bed such that 
-dead_zone=(arm_length + effector_radius - bed_radius*2 + carriage_offset);
-max_deflect=(0);
+// computed value, the gap to space from the center of the bed such that the 
+// angle to the arm at center is ~60degrees
+
+dead_zone=((arm_length * sin(60)) - bed_radius - effector_radius - carriage_offset);
