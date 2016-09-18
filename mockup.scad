@@ -1,6 +1,3 @@
-echo(arm_length * sin(60));
-echo(arm_length * cos(60));
-echo(dead_zone);
 module top() {
     sidewalls(switchmount=true, bedmount=false);
     for (i = [60: 60 : 360 - 60]) 
