@@ -31,8 +31,12 @@ module effector() {
                                         cylinder(r1=cone_r2, r2=cone_r2, h=20, center=true, $fn=24);
                                 }
                                 translate([(track[1]+9.5)/2,-1,0]) {
-                                    rotate([45, 0, 0])
+                                    rotate([45, 0, 0]) {
                                         #cylinder(r=m3_radius, h=separation+1, center=true, $fn=12);
+                                    }
+                                    rotate([-45, 0, 0])
+                                        translate([0,6,0])
+                                        #cube([30,3,20],center=true);
                                 }
                             }
                         }
@@ -62,6 +66,18 @@ module effector() {
             translate([0, mount_radius, 0])
                 cylinder(r=m3_wide_radius, h=2*height, center=true, $fn=12);
         }
+        if (magnetic) 
+            for (a = [60:120:359]) rotate([0, 0, a]) 
+                translate([0, offset, 0]) 
+
+                    for (s = [-1, 1]) scale([s, 1, 1])
+                        translate([(track[1]+9.5)/2,-1,0]) {
+                            rotate([45, 0, 0]) {
+                                #cylinder(r=m3_radius, h=separation+1, center=true, $fn=12);
+                                translate([0,0,8])
+                                    #cylinder(r=m3_nut_radius, h=6, center=true, $fn=6);
+                            }
+                        }
     }
 }
 
